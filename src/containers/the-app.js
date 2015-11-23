@@ -18,11 +18,11 @@ TheApp.propTypes = {
   aReducer: PropTypes.array.isRequired,
 };
 
-function select(state) {
+function mapStateToProps(state) {
   console.log(state);
   return {
     aReducer: state.aReducer,
   };
 }
 
-export default connect(select)(TheApp);
+export default connect(mapStateToProps)(TheApp);
