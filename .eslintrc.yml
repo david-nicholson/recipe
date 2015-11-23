@@ -1,3 +1,5 @@
 extends: airbnb
 plugins:
   - react
+env:
+  mocha: true

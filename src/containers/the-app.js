@@ -8,19 +8,21 @@ class TheApp extends Component {
     const { dispatch, aReducer } = this.props;
 
     return (
-      <AComponent aReducer={aReducer} />
+      <AComponent aReducer={aReducer} onExample={something => dispatch(exampleAction(something))} />
     );
-    // example action: <AComponent onFilterSomething={something => dispatch(exampleAction(something))} />
   }
 }
 
-TheApp.propTypes = {};
+TheApp.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  aReducer: PropTypes.array.isRequired,
+};
 
 function select(state) {
-  console.log(state)
+  console.log(state);
   return {
-    aReducer: state.aReducer
-  }
+    aReducer: state.aReducer,
+  };
 }
 
 export default connect(select)(TheApp);
