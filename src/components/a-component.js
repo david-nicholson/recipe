@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-require('./a-component.scss');
+import './a-component.scss';
 
 class AComponent extends Component {
   render() {
