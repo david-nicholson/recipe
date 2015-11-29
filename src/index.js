@@ -1,15 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import app from './reducers';
-import TheApp from './containers/the-app';
-
-const store = createStore(app);
+import Root from './containers/root';
 
 render(
-  <Provider store={store}>
-    <TheApp />
-  </Provider>,
-  document.getElementById('container')
+  <Root />,
+  document.querySelector('.bbc-recipe-app')
 );
