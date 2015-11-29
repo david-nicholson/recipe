@@ -4,13 +4,12 @@ import TestUtils from 'react-addons-test-utils';
 import RecipeMethod from './component';
 
 describe('Component: Recipe Method', () => {
-
   let methodHeading;
   let methodElems;
 
   beforeEach(() => {
     const renderedComponent = TestUtils.renderIntoDocument(
-      <RecipeMethod method={[0,1,2,3]} />
+      <RecipeMethod method={[0, 1, 2, 3]} />
     );
     methodHeading = TestUtils.findRenderedDOMComponentWithClass(
       renderedComponent,

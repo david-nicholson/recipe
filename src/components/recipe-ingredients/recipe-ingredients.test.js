@@ -4,11 +4,24 @@ import TestUtils from 'react-addons-test-utils';
 import RecipeIngredients from './component';
 
 describe('Component: Recipe Image', () => {
-
   let renderedComponent;
   let headingElem;
   let ingredientElems;
   const ingredients = ['something', 'something else'];
+
+  function renderComponent(ingredientList) {
+    renderedComponent = TestUtils.renderIntoDocument(
+      <RecipeIngredients ingredients={ingredientList} />
+    );
+    headingElem = TestUtils.findRenderedDOMComponentWithClass(
+      renderedComponent,
+      'bbc-ingredients__heading'
+    );
+    ingredientElems = TestUtils.scryRenderedDOMComponentsWithClass(
+      renderedComponent,
+      'bbc-ingredients__item'
+    );
+  }
 
   describe('given a flat array', () => {
     it('should render correctly', () => {
@@ -31,7 +44,7 @@ describe('Component: Recipe Image', () => {
         group: anotherGroupTitle,
         ingredients: ingredients,
       },
-      lastIngredient
+      lastIngredient,
     ];
 
     it('should render correctly', () => {
@@ -58,23 +71,4 @@ describe('Component: Recipe Image', () => {
       expect(ingredientElems.length).to.equal(7);
     });
   });
-
-  function renderComponent(ingredients) {
-    renderedComponent = TestUtils.renderIntoDocument(
-      <RecipeIngredients ingredients={ingredients} />
-    );
-    headingElem = TestUtils.findRenderedDOMComponentWithClass(
-      renderedComponent,
-      'bbc-ingredients__heading'
-    );
-    ingredientElems = TestUtils.scryRenderedDOMComponentsWithClass(
-      renderedComponent,
-      'bbc-ingredients__item'
-    );
-  }
-
-  //
-  // it('shouldnt render when all required props arent specified', () => {
-  //
-  // });
 });

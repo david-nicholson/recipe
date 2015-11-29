@@ -13,6 +13,7 @@ const initialState = {
 
 export default function recipe(state = initialState, action) {
   switch (action.type) {
+    /* eslint-disable indent */
     case REQUEST_RECIPE:
       return Object.assign({}, state, {
         isFetching: true,
@@ -24,5 +25,6 @@ export default function recipe(state = initialState, action) {
       });
     default:
       return state;
+    /* eslint-enable indent */
   }
-};
+}

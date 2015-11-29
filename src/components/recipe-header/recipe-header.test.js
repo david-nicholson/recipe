@@ -6,7 +6,6 @@ import RecipeHeader from './component';
 import RecipeFilter from '../recipe-filter/component';
 
 describe('Component: Recipe Header', () => {
-
   let heading;
   let recipeFilter;
   let orderLink;

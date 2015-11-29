@@ -1,12 +1,11 @@
 import { expect } from 'chai';
 import React from 'react';
-import sinon from 'sinon'
+import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 import TestUtils from 'react-addons-test-utils';
 import RecipeView from '../../components/recipe-view/component';
 
 describe('Container: Recipe View App', () => {
-
   let recipeViewElem;
   let dispatchSpy;
   let fetchRecipeSpy;
@@ -28,15 +27,15 @@ describe('Container: Recipe View App', () => {
         'to',
         'make',
         'something',
-      ]
-    }
+      ],
+    },
   };
 
   beforeEach(() => {
     dispatchSpy = sinon.spy();
     fetchRecipeSpy = sinon.spy();
     const RecipeViewAppMock = proxyquire.noCallThru().load('./recipe-view-app', {
-      '../../actions/recipe/recipe': { fetchRecipe: fetchRecipeSpy }
+      '../../actions/recipe/recipe': { fetchRecipe: fetchRecipeSpy },
     });
     const renderedComponent = TestUtils.renderIntoDocument(
       <RecipeViewAppMock.RecipeViewApp recipe={recipe} dispatch={dispatchSpy} routeParams={routeParams} />
@@ -55,5 +54,4 @@ describe('Container: Recipe View App', () => {
     expect(dispatchSpy.calledOnce);
     expect(fetchRecipeSpy.withArgs(routeParams).calledOnce);
   });
-
 });

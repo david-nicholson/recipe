@@ -5,7 +5,6 @@ import TestUtils, { Simulate } from 'react-addons-test-utils';
 import RecipeFilter from './component';
 
 describe('Component: Recipe Filter', () => {
-
   let filterElem;
   let spyOnChange;
 

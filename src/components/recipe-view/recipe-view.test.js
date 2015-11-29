@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import React from 'react';
-import TestUtils, { Simulate } from 'react-addons-test-utils';
+import TestUtils from 'react-addons-test-utils';
 import RecipeView from './component';
 import RecipeImage from '../recipe-image/component';
 import RecipeIngredients from '../recipe-ingredients/component';
@@ -8,7 +8,6 @@ import RecipeMethod from '../recipe-method/component';
 import { Link } from 'react-router';
 
 describe('Component: Recipe View', () => {
-
   let heading;
   let recipeImage;
   let summary;
@@ -23,15 +22,15 @@ describe('Component: Recipe View', () => {
       'a',
       'list',
       'of',
-      'ingredients'
+      'ingredients',
     ],
     method: [
       'the',
       'method',
       'to',
       'make',
-      'something'
-    ]
+      'something',
+    ],
   };
 
   beforeEach(() => {

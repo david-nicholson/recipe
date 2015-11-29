@@ -15,12 +15,12 @@ class Recipe extends Component {
       </li>
     );
   }
-};
+}
 
 Recipe.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  cookingTime: PropTypes.string.isRequired
+  cookingTime: PropTypes.string.isRequired,
 };
 
 export default Recipe;

@@ -9,23 +9,23 @@ export const SORT_RECIPES = 'SORT_RECIPES';
 export function requestRecipes() {
   return {
     type: REQUEST_RECIPES,
-  }
+  };
 }
 
 export function receiveRecipes(recipes) {
   return {
     type: RECEIVE_RECIPES,
     recipes: recipes,
-  }
+  };
 }
 
 export function fetchRecipes() {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(requestRecipes());
     return fetch('http://0.0.0.0:3000/data/recipes')
       .then(response => response.json())
       .then(json => dispatch(receiveRecipes(json)));
-  }
+  };
 }
 
 export function filterRecipes(searchTerm) {
@@ -33,16 +33,16 @@ export function filterRecipes(searchTerm) {
     type: FILTER_RECIPES,
     searchTerm,
   };
-};
+}
 
 export function showMoreRecipes() {
   return {
     type: SHOW_MORE_RECIPES,
-  }
+  };
 }
 
 export function sortRecipes() {
   return {
     type: SORT_RECIPES,
-  }
+  };
 }

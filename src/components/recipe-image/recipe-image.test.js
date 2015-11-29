@@ -4,7 +4,6 @@ import TestUtils from 'react-addons-test-utils';
 import RecipeImage from './component';
 
 describe('Component: Recipe Image', () => {
-
   let imageElem;
   let src;
   let alt;

@@ -5,10 +5,9 @@ import Recipe from './component';
 import RecipeImage from '../recipe-image/component';
 
 describe('Component: Recipe', () => {
-
-  let name = {};
-  let image = {};
-  let time = {};
+  const name = {};
+  const image = {};
+  const time = {};
 
   beforeEach(() => {
     name.value = 'A recipe';
@@ -41,5 +40,4 @@ describe('Component: Recipe', () => {
     expect(timeElem[0].innerHTML).to.equal(time.value);
     expect(timeElem[1].innerHTML).to.equal(' mins');
   });
-  
 });

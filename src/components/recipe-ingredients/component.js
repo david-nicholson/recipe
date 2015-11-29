@@ -8,11 +8,11 @@ class RecipeIngredients extends Component {
         <ul className="bbc-ingredients__list">
           {this.props.ingredients.map((ingredient) => {
             if (typeof ingredient === 'object') {
-              let subGroup = ingredient.ingredients.map((groupIngredient) => <li className="bbc-ingredients__item bbc-ingredients__item--sub">{groupIngredient}</li>)
-              subGroup.unshift(<li className="bbc-ingredients__item bbc-ingredients__item--group-heading">{ingredient.group}</li>)
-              return subGroup
-            } else {
-              return <li className="bbc-ingredients__item">{ingredient}</li>
+              const subGroup = ingredient.ingredients.map((groupIngredient) => <li className="bbc-ingredients__item bbc-ingredients__item--sub">{groupIngredient}</li>);
+              subGroup.unshift(<li className="bbc-ingredients__item bbc-ingredients__item--group-heading">{ingredient.group}</li>);
+              return subGroup;
+            } else { // eslint-disable-line no-else-return
+              return <li className="bbc-ingredients__item">{ingredient}</li>;
             }
           })}
         </ul>
@@ -21,8 +21,8 @@ class RecipeIngredients extends Component {
   }
 }
 
-// RecipeIngredients.propTypes = {
-//   ingredients: PropTypes.arrayOf(PropTypes.).isRequired
-// };
+RecipeIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.string.optional).isRequired,
+};
 
 export default RecipeIngredients;

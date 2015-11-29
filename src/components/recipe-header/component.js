@@ -16,6 +16,6 @@ class RecipeHeader extends Component {
 RecipeHeader.propTypes = {
   onFilterRecipes: PropTypes.func.isRequired,
   onSortRecipes: PropTypes.func.isRequired,
-}
+};
 
 export default RecipeHeader;

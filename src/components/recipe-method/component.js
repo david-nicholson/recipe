@@ -13,8 +13,8 @@ class RecipeMethod extends Component {
   }
 }
 
-// RecipeViewApp.propTypes = {
-//   recipe: PropTypes.object.isRequired
-// };
+RecipeMethod.propTypes = {
+  method: PropTypes.arrayOf(PropTypes.string.required).isRequired,
+};
 
 export default RecipeMethod;

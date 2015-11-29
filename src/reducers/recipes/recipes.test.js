@@ -4,10 +4,10 @@ import {
   RECEIVE_RECIPES,
   FILTER_RECIPES,
   SHOW_MORE_RECIPES,
-  SORT_RECIPES
+  SORT_RECIPES,
 } from '../../actions/recipes/recipes';
 import recipes from './recipes';
-import filterFixture from '../../../test/fixtures/filter'
+import filterFixture from '../../../test/fixtures/filter';
 
 describe('Reducer: Recipes', () => {
   describe(REQUEST_RECIPES, () => {
@@ -19,13 +19,13 @@ describe('Reducer: Recipes', () => {
 
   describe(RECEIVE_RECIPES, () => {
     it('should get items and puts the correct amount of items in view', () => {
-      const items = [1,2,3,4,5,6];
+      const items = [1, 2, 3, 4, 5, 6];
       const requestRecipes = recipes({
         isFetching: true,
         noOfItemsInView: 3,
       }, {
         type: RECEIVE_RECIPES,
-        recipes: items
+        recipes: items,
       });
 
       expect(requestRecipes.isFetching).to.equal(false);
@@ -35,110 +35,110 @@ describe('Reducer: Recipes', () => {
   });
 
   describe(FILTER_RECIPES, () => {
-    it('should return all recipes when no search is specified', () => {
-      const recipes = getFilteredRecipes('');
+    function getFilteredRecipes(searchTerm, fixture = filterFixture) {
+      return recipes(fixture, { type: FILTER_RECIPES, searchTerm: searchTerm });
+    }
 
-      expect(recipes.filteredResults.length).to.equal(0);
-      expect(recipes.items.length).to.equal(3);
-      expect(recipes.items[0].name).to.equal('Sapphire\'s stir-fry');
-      expect(recipes.items[1].name).to.equal('Easy chocolate cake');
-      expect(recipes.items[2].name).to.equal('Chicken Kiev');
-      expect(recipes.noOfItemsInView).to.equal(10);
+    it('should return all recipes when no search is specified', () => {
+      const filteredRecipes = getFilteredRecipes('');
+
+      expect(filteredRecipes.filteredResults.length).to.equal(0);
+      expect(filteredRecipes.items.length).to.equal(3);
+      expect(filteredRecipes.items[0].name).to.equal('Sapphire\'s stir-fry');
+      expect(filteredRecipes.items[1].name).to.equal('Easy chocolate cake');
+      expect(filteredRecipes.items[2].name).to.equal('Chicken Kiev');
+      expect(filteredRecipes.noOfItemsInView).to.equal(10);
     });
 
     describe('should return the correct recipes when a search is specified', () => {
       it('with a single character', () => {
-        let recipes = getFilteredRecipes('k');
-        expect(recipes.filteredResults.length).to.equal(2);
-        expect(recipes.itemsInView.length).to.equal(2);
-        expect(recipes.filteredResults[0].name).to.equal('Easy chocolate cake');
-        expect(recipes.filteredResults[1].name).to.equal('Chicken Kiev');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        let filteredRecipes = getFilteredRecipes('k');
+        expect(filteredRecipes.filteredResults.length).to.equal(2);
+        expect(filteredRecipes.itemsInView.length).to.equal(2);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Easy chocolate cake');
+        expect(filteredRecipes.filteredResults[1].name).to.equal('Chicken Kiev');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
 
-        recipes = getFilteredRecipes('K');
-        expect(recipes.filteredResults.length).to.equal(2);
-        expect(recipes.itemsInView.length).to.equal(2);
-        expect(recipes.filteredResults[0].name).to.equal('Easy chocolate cake');
-        expect(recipes.filteredResults[1].name).to.equal('Chicken Kiev');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        filteredRecipes = getFilteredRecipes('K');
+        expect(filteredRecipes.filteredResults.length).to.equal(2);
+        expect(filteredRecipes.itemsInView.length).to.equal(2);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Easy chocolate cake');
+        expect(filteredRecipes.filteredResults[1].name).to.equal('Chicken Kiev');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
       });
 
       it('with multiple characters', () => {
-        let recipes = getFilteredRecipes('Chicken');
-        expect(recipes.filteredResults.length).to.equal(1);
-        expect(recipes.itemsInView.length).to.equal(1);
-        expect(recipes.filteredResults[0].name).to.equal('Chicken Kiev');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        let filteredRecipes = getFilteredRecipes('Chicken');
+        expect(filteredRecipes.filteredResults.length).to.equal(1);
+        expect(filteredRecipes.itemsInView.length).to.equal(1);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Chicken Kiev');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
 
-        recipes = getFilteredRecipes('Courgette');
-        expect(recipes.filteredResults.length).to.equal(1);
-        expect(recipes.itemsInView.length).to.equal(1);
-        expect(recipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        filteredRecipes = getFilteredRecipes('Courgette');
+        expect(filteredRecipes.filteredResults.length).to.equal(1);
+        expect(filteredRecipes.itemsInView.length).to.equal(1);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
       });
 
       it('with special characters', () => {
-        let recipes = getFilteredRecipes('\'');
-        expect(recipes.filteredResults.length).to.equal(1);
-        expect(recipes.itemsInView.length).to.equal(1);
-        expect(recipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        let filteredRecipes = getFilteredRecipes('\'');
+        expect(filteredRecipes.filteredResults.length).to.equal(1);
+        expect(filteredRecipes.itemsInView.length).to.equal(1);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
 
-        recipes = getFilteredRecipes('-');
-        expect(recipes.filteredResults.length).to.equal(2);
-        expect(recipes.itemsInView.length).to.equal(2);
-        expect(recipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
-        expect(recipes.filteredResults[1].name).to.equal('Easy chocolate cake');
-        expect(recipes.noOfItemsInView).to.equal(10);
+        filteredRecipes = getFilteredRecipes('-');
+        expect(filteredRecipes.filteredResults.length).to.equal(2);
+        expect(filteredRecipes.itemsInView.length).to.equal(2);
+        expect(filteredRecipes.filteredResults[0].name).to.equal('Sapphire\'s stir-fry');
+        expect(filteredRecipes.filteredResults[1].name).to.equal('Easy chocolate cake');
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
       });
 
       it('that doesnt exist', () => {
-        const recipes = getFilteredRecipes('Lasagane');
+        const filteredRecipes = getFilteredRecipes('Lasagane');
 
-        expect(recipes.filteredResults.length).to.equal(0);
-        expect(recipes.itemsInView.length).to.equal(0);
-        expect(recipes.noOfItemsInView).to.equal(10);
+        expect(filteredRecipes.filteredResults.length).to.equal(0);
+        expect(filteredRecipes.itemsInView.length).to.equal(0);
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
       });
 
       it('doesnt show more than 10 results', () => {
         const items = {items: [{name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}, {name: 'a', ingredients: ['a']}]};
-        const recipes = getFilteredRecipes('a', items);
-        expect(getFilteredRecipes('a', items).itemsInView.length).to.equal(10);
-        expect(recipes.noOfItemsInView).to.equal(10);
+        const filteredRecipes = getFilteredRecipes('a', items);
+        expect(filteredRecipes.itemsInView.length).to.equal(10);
+        expect(filteredRecipes.noOfItemsInView).to.equal(10);
       });
     });
-
-    function getFilteredRecipes(searchTerm, fixture = filterFixture) {
-      return recipes(fixture, { type: FILTER_RECIPES, searchTerm: searchTerm });
-    };
   });
 
   describe(SHOW_MORE_RECIPES, () => {
     it('should show more recipes', () => {
       const showMoreRecipes = recipes({
         filterTerm: '',
-        items: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+        items: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
         noOfItemsInView: 2,
       }, {
-        type: SHOW_MORE_RECIPES
+        type: SHOW_MORE_RECIPES,
       });
 
       expect(showMoreRecipes.noOfItemsInView).to.equal(12);
-      expect(showMoreRecipes.itemsInView).to.eql([0,1,2,3,4,5,6,7,8,9,10,11]);
+      expect(showMoreRecipes.itemsInView).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
     });
 
     it('should show more filtered results', () => {
       const showMoreRecipes = recipes({
         filterTerm: 'something',
-        filteredResults: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
-        items: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+        filteredResults: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        items: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
         noOfItemsInView: 2,
       }, {
-        type: SHOW_MORE_RECIPES
+        type: SHOW_MORE_RECIPES,
       });
 
       expect(showMoreRecipes.noOfItemsInView).to.equal(12);
-      expect(showMoreRecipes.itemsInView).to.eql([1,2,3,4,5,6,7,8,9,10,11,12]);
+      expect(showMoreRecipes.itemsInView).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     });
   });
 
@@ -151,7 +151,7 @@ describe('Reducer: Recipes', () => {
         items: [{cookingTime: '4'}, {cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '1'}],
         noOfItemsInView: 2,
       }, {
-        type: SORT_RECIPES
+        type: SORT_RECIPES,
       });
 
       expect(showMoreRecipes.items).to.eql([{cookingTime: '1'}, {cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '4'}]);
@@ -167,7 +167,7 @@ describe('Reducer: Recipes', () => {
         items: [{cookingTime: '1'}, {cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '4'}],
         noOfItemsInView: 2,
       }, {
-        type: SORT_RECIPES
+        type: SORT_RECIPES,
       });
 
       expect(showMoreRecipes.items).to.eql([{cookingTime: '4'}, {cookingTime: '2'}, {cookingTime: '1'}, {cookingTime: '1'}]);
@@ -183,7 +183,7 @@ describe('Reducer: Recipes', () => {
         items: [{cookingTime: '4'}, {cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '1'}],
         noOfItemsInView: 2,
       }, {
-        type: SORT_RECIPES
+        type: SORT_RECIPES,
       });
 
       expect(showMoreRecipes.filteredResults).to.eql([{cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '3'}, {cookingTime: '5'}]);
@@ -200,7 +200,7 @@ describe('Reducer: Recipes', () => {
         items: [{cookingTime: '4'}, {cookingTime: '1'}, {cookingTime: '2'}, {cookingTime: '1'}],
         noOfItemsInView: 2,
       }, {
-        type: SORT_RECIPES
+        type: SORT_RECIPES,
       });
 
       expect(showMoreRecipes.filteredResults).to.eql([{cookingTime: '5'}, {cookingTime: '3'}, {cookingTime: '2'}, {cookingTime: '1'}]);

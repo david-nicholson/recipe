@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import React from 'react';
-import sinon from 'sinon'
+import sinon from 'sinon';
 import proxyquire from 'proxyquire';
 import TestUtils from 'react-addons-test-utils';
 import RecipeHeader from '../../components/recipe-header/component';
@@ -8,7 +8,6 @@ import RecipeList from '../../components/recipe-list/component';
 import RecipeShowMore from '../../components/recipe-show-more/component';
 
 describe('Container: Recipe View App', () => {
-
   let dispatchSpy;
   let fetchRecipesSpy;
   let filterRecipesSpy;
@@ -17,7 +16,6 @@ describe('Container: Recipe View App', () => {
   let renderedComponent;
   let recipeHeaderElem;
   let recipeListElem;
-  const routeParams = { name: 'a-recipe' };
   const recipes = {
     itemsInView: [
       'a-recipe',
@@ -32,6 +30,28 @@ describe('Container: Recipe View App', () => {
     filteredResults: [],
   };
 
+  function renderComponent(state) {
+    const RecipeAppMock = proxyquire.noCallThru().load('./recipe-app', {
+      '../../actions/recipes/recipes': {
+        fetchRecipes: fetchRecipesSpy,
+        filterRecipes: filterRecipesSpy,
+        sortRecipes: sortRecipesSpy,
+        showMoreRecipes: showMoreSpy,
+      },
+    });
+    renderedComponent = TestUtils.renderIntoDocument(
+      <RecipeAppMock.RecipeApp recipes={state} dispatch={dispatchSpy} />
+    );
+    recipeHeaderElem = TestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      RecipeHeader
+    );
+    recipeListElem = TestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      RecipeList
+    );
+  }
+
   beforeEach(() => {
     dispatchSpy = sinon.spy();
     fetchRecipesSpy = sinon.spy();
@@ -42,7 +62,7 @@ describe('Container: Recipe View App', () => {
 
   it('should render correctly when all required props are specified', () => {
     renderComponent(recipes);
-    expect(recipeHeaderElem).to.exist;
+    expect(recipeHeaderElem).to.exist; // eslint-disable-line no-unused-expressions
     expect(recipeListElem.props.recipes).to.eql(recipes.itemsInView);
   });
 
@@ -71,14 +91,19 @@ describe('Container: Recipe View App', () => {
   });
 
   describe('show more button', () => {
+    function getShowMoreElems() {
+      return TestUtils.scryRenderedComponentsWithType(
+        renderedComponent,
+        RecipeShowMore
+      );
+    }
 
     describe('when there is no search term', () => {
       it('should display if there are more results than the default amount displayed', () => {
-        const state = {
-          ...recipes,
+        const state = Object.assign({
           filterTerm: '',
           noOfItemsInView: 2,
-        }
+        }, recipes);
 
         renderComponent(state);
 
@@ -86,11 +111,10 @@ describe('Container: Recipe View App', () => {
       });
 
       it('should not display if there are less results than the default amount displayed', () => {
-        const state = {
-          ...recipes,
+        const state = Object.assign({
           filterTerm: '',
           noOfItemsInView: 4,
-        }
+        }, recipes);
 
         renderComponent(state);
 
@@ -99,16 +123,14 @@ describe('Container: Recipe View App', () => {
     });
 
     describe('when there is a search term', () => {
-
-      const filteredResults = [1,2,3];
+      const filteredResults = [1, 2, 3];
 
       it('should display if there are more results than the default amount displayed', () => {
-        const state = {
-          ...recipes,
-          filteredResults: filteredResults,
+        const state = Object.assign({
           filterTerm: 'something',
           noOfItemsInView: 2,
-        }
+        }, recipes);
+        state.filteredResults = filteredResults;
 
         renderComponent(state);
 
@@ -116,12 +138,11 @@ describe('Container: Recipe View App', () => {
       });
 
       it('should not display if there are less results than the default amount displayed', () => {
-        const state = {
-          ...recipes,
-          filteredResults: filteredResults,
+        const state = Object.assign({
           filterTerm: 'something',
           noOfItemsInView: 4,
-        }
+        }, recipes);
+        state.filteredResults = filteredResults;
 
         renderComponent(state);
 
@@ -130,11 +151,10 @@ describe('Container: Recipe View App', () => {
     });
 
     it('should call to showMoreRecipes when onShowMore prop is executed', () => {
-      const state = {
-        ...recipes,
+      const state = Object.assign({
         filterTerm: '',
         noOfItemsInView: 2,
-      }
+      }, recipes);
 
       renderComponent(state);
 
@@ -142,14 +162,6 @@ describe('Container: Recipe View App', () => {
       expect(dispatchSpy.calledOnce);
       expect(showMoreSpy.calledOnce);
     });
-
-    function getShowMoreElems() {
-      return TestUtils.scryRenderedComponentsWithType(
-        renderedComponent,
-        RecipeShowMore
-      );
-    }
-
   });
 
   afterEach(() => {
@@ -159,27 +171,4 @@ describe('Container: Recipe View App', () => {
     sortRecipesSpy.reset();
     showMoreSpy.reset();
   });
-
-  function renderComponent(state) {
-    const RecipeAppMock = proxyquire.noCallThru().load('./recipe-app', {
-      '../../actions/recipes/recipes': {
-        fetchRecipes: fetchRecipesSpy,
-        filterRecipes: filterRecipesSpy,
-        sortRecipes: sortRecipesSpy,
-        showMoreRecipes: showMoreSpy,
-      }
-    });
-    renderedComponent = TestUtils.renderIntoDocument(
-      <RecipeAppMock.RecipeApp recipes={state} dispatch={dispatchSpy} />
-    );
-    recipeHeaderElem = TestUtils.findRenderedComponentWithType(
-      renderedComponent,
-      RecipeHeader
-    );
-    recipeListElem = TestUtils.findRenderedComponentWithType(
-      renderedComponent,
-      RecipeList
-    );
-  }
-
 });

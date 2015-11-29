@@ -6,21 +6,20 @@ import RecipeView from '../../components/recipe-view/component';
 export class RecipeViewApp extends Component {
 
   componentDidMount() {
-    const { dispatch, recipe } = this.props;
-    dispatch(action.fetchRecipe(this.props.routeParams.name));
+    this.props.dispatch(action.fetchRecipe(this.props.routeParams.name));
   }
 
   render() {
-    const { dispatch, recipe } = this.props;
-
     return (
-      <RecipeView recipe={recipe.item} />
+      <RecipeView recipe={this.props.recipe.item} />
     );
   }
 }
 
 RecipeViewApp.propTypes = {
-  recipe: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  recipe: PropTypes.object.isRequired,
+  routeParams: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

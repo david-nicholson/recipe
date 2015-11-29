@@ -20,6 +20,7 @@ const initialState = {
 
 export default function recipes(state = initialState, action) {
   switch (action.type) {
+    /* eslint-disable indent */
     case REQUEST_RECIPES:
       return Object.assign({}, state, {
         isFetching: true,
@@ -31,7 +32,7 @@ export default function recipes(state = initialState, action) {
         itemsInView: [...action.recipes].splice(0, state.noOfItemsInView),
       });
     case FILTER_RECIPES:
-      //assuming a case insensitive search, searching all recipes and that there is pagination on the filter that resets with each type ?? NEED TO RESET
+      // assuming a case insensitive search, searching all recipes and that there is pagination on the filter that resets with each type ?? NEED TO RESET
       const searchTerm = action.searchTerm.toLowerCase();
       let itemsInView;
       let filteredResults = [];
@@ -62,19 +63,20 @@ export default function recipes(state = initialState, action) {
         itemsInView: [...items].splice(0, newNoOfItemsInView),
       });
     case SORT_RECIPES:
-      const ascending = (a, b) => parseInt(a.cookingTime) - parseInt(b.cookingTime);
-      const decending = (a, b) => parseInt(b.cookingTime) - parseInt(a.cookingTime);
+      const ascending = (a, b) => parseInt(a.cookingTime, 10) - parseInt(b.cookingTime, 10);
+      const decending = (a, b) => parseInt(b.cookingTime, 10) - parseInt(a.cookingTime, 10);
       const filteredRecipes = [...state.filteredResults].sort(state.ascending ? decending : ascending);
-      const recipes = [...state.items].sort(state.ascending ? decending : ascending);
-      const inViewItems = state.filterTerm ? filteredRecipes : recipes;
+      const recipesList = [...state.items].sort(state.ascending ? decending : ascending);
+      const inViewItems = state.filterTerm ? filteredRecipes : recipesList;
 
       return Object.assign({}, state, {
         filteredResults: filteredRecipes,
-        items: recipes,
+        items: recipesList,
         itemsInView: [...inViewItems].splice(0, state.noOfItemsInView),
         ascending: !state.ascending,
       });
     default:
       return state;
+    /* eslint-enable indent */
   }
-};
+}

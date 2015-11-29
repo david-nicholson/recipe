@@ -6,10 +6,10 @@ class RecipeFilter extends Component {
       <input ref="searchTerm" className="bbc-recipe-filter" type="text" onChange={ event => this.props.onFilterRecipes(event.target.value) } placeholder="Filter recipes" />
     );
   }
-};
+}
 
 RecipeFilter.propTypes = {
-  onFilterRecipes: PropTypes.func.isRequired
-}
+  onFilterRecipes: PropTypes.func.isRequired,
+};
 
 export default RecipeFilter;

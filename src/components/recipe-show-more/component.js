@@ -8,4 +8,8 @@ class RecipeShowMore extends Component {
   }
 }
 
+RecipeShowMore.propTypes = {
+  onShowMore: PropTypes.func.isRequired,
+};
+
 export default RecipeShowMore;

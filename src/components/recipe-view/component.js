@@ -19,17 +19,16 @@ class RecipeView extends Component {
       </div>
     );
   }
-};
+}
 
-// RecipeView.propTypes = {
-//   recipe: PropTypes.objectOf(PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     image: PropTypes.string.isRequired,
-//     cookingTime: PropTypes.string.isRequired,
-//     ingredients: PropTypes.arrayOf(
-//       PropTypes.string.isRequired
-//     ).isRequired,
-//   }));
-// }
+RecipeView.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    cookingTime: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string.isOptional).isRequired,
+    method: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  })),
+};
 
 export default RecipeView;

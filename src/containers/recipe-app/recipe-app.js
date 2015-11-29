@@ -1,12 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipes, filterRecipes, showMoreRecipes, sortRecipes } from '../../actions/recipes/recipes';
 import action from '../../actions/recipes/recipes';
 import RecipeHeader from '../../components/recipe-header/component';
 import RecipeList from '../../components/recipe-list/component';
 import RecipeShowMore from '../../components/recipe-show-more/component';
 
 export class RecipeApp extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(action.fetchRecipes());
+  }
 
   getShowMore(dispatch) {
     const filterTerm = this.props.recipes.filterTerm;
@@ -15,13 +19,8 @@ export class RecipeApp extends Component {
     const noOfItemsInView = this.props.recipes.noOfItemsInView;
 
     if ((!filterTerm && (noOfRecipes > noOfItemsInView)) || (filterTerm && (noOfFilteredRecipes > noOfItemsInView))) {
-      return <RecipeShowMore onShowMore={() => dispatch(action.showMoreRecipes())} />
+      return <RecipeShowMore onShowMore={() => dispatch(action.showMoreRecipes())} />;
     }
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(action.fetchRecipes());
   }
 
   render() {
@@ -30,7 +29,7 @@ export class RecipeApp extends Component {
     return (
       <div>
         <RecipeHeader onFilterRecipes={searchTerm => dispatch(action.filterRecipes(searchTerm))} onSortRecipes={() => dispatch(action.sortRecipes())} />
-        <RecipeList recipes={this.props.recipes.itemsInView} />
+        <RecipeList recipes={recipes.itemsInView} />
         {this.getShowMore(dispatch)}
       </div>
     );
@@ -38,7 +37,8 @@ export class RecipeApp extends Component {
 }
 
 RecipeApp.propTypes = {
-  recipes: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  recipes: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -9,7 +9,7 @@ class RecipeList extends Component {
       </ul>
     );
   }
-};
+}
 
 RecipeList.propTypes = {
   recipes: PropTypes.array.isRequired,

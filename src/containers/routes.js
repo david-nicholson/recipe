@@ -8,6 +8,7 @@ class Routes extends Component {
     return (
       <Router>
         <Route path="/" component={RecipeApp} />
+        <Route path="/recipe/:name" component={RecipeViewApp} />
       </Router>
     );
   }

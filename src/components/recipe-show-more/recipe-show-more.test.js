@@ -5,7 +5,6 @@ import TestUtils, { Simulate } from 'react-addons-test-utils';
 import RecipeShowMore from './component';
 
 describe('Component: Recipe Show More', () => {
-
   let button;
   let spyOnClick;
 

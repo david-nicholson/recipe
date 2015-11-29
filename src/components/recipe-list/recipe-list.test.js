@@ -5,7 +5,6 @@ import RecipeList from './component';
 import Recipe from '../recipe/component';
 
 describe('Component: Recipe List', () => {
-
   let listElem;
   let recipeElems;
 

@@ -8,7 +8,7 @@ export function requestRecipe(recipeName) {
   return {
     type: REQUEST_RECIPE,
     recipeName,
-  }
+  };
 }
 
 export function receiveRecipe(recipeName, recipe) {
@@ -16,14 +16,14 @@ export function receiveRecipe(recipeName, recipe) {
     type: RECEIVE_RECIPE,
     recipeName,
     recipe: recipe,
-  }
+  };
 }
 
 export function fetchRecipe(recipeName) {
-  return function (dispatch) {
+  return function(dispatch) {
     dispatch(requestRecipe(recipeName));
     return fetch(`http://0.0.0.0:3000/data/recipes/${recipeName}`)
       .then(response => response.json())
       .then(json => dispatch(receiveRecipe(recipeName, json)));
-  }
+  };
 }
