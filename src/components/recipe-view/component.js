@@ -8,15 +8,28 @@ import './styles.scss';
 
 class RecipeView extends Component {
   render() {
+    const { error, recipe } = this.props;
+    let content;
+
+    if (error) {
+      content = <h2 className="bbc-recipe__error">{error}</h2>;
+    } else {
+      content = (
+        <div>
+          <h1 className="bbc-recipe__heading">{recipe.name}</h1>
+          <RecipeImage className="bbc-recipe__image" src={recipe.image} alt={recipe.name} />
+          <div className="bbc-recipe__inner">
+            <div className="bbc-recipe__summary">{recipe.summary}</div>
+            <RecipeIngredients ingredients={recipe.ingredients} />
+            <RecipeMethod method={recipe.method} />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="bbc-recipe">
-        <h1 className="bbc-recipe__heading">{this.props.recipe.name}</h1>
-        <RecipeImage className="bbc-recipe__image" src={this.props.recipe.image} alt={this.props.recipe.name} />
-        <div className="bbc-recipe__inner">
-          <div className="bbc-recipe__summary">{this.props.recipe.summary}</div>
-          <RecipeIngredients ingredients={this.props.recipe.ingredients} />
-          <RecipeMethod method={this.props.recipe.method} />
-        </div>
+        {content}
         <Link to={'/'} className="bbc-recipe__back-btn">Back</Link>
       </div>
     );
@@ -24,6 +37,7 @@ class RecipeView extends Component {
 }
 
 RecipeView.propTypes = {
+  error: PropTypes.string.isRequired,
   recipe: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,

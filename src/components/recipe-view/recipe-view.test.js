@@ -8,12 +8,9 @@ import RecipeMethod from '../recipe-method/component';
 import { Link } from 'react-router';
 
 describe('Component: Recipe View', () => {
-  let heading;
-  let recipeImage;
-  let summary;
-  let ingredients;
-  let method;
+  let renderedComponent;
   let backLink;
+  let errorElems;
   const recipe = {
     name: 'A recipe',
     image: 'an-image-url.com',
@@ -33,37 +30,44 @@ describe('Component: Recipe View', () => {
     ],
   };
 
-  beforeEach(() => {
-    const renderedComponent = TestUtils.renderIntoDocument(
-      <RecipeView recipe={recipe} />
-    );
-    heading = TestUtils.findRenderedDOMComponentWithClass(
-      renderedComponent,
-      'bbc-recipe__heading'
-    );
-    recipeImage = TestUtils.findRenderedComponentWithType(
-      renderedComponent,
-      RecipeImage
-    );
-    summary = TestUtils.findRenderedDOMComponentWithClass(
-      renderedComponent,
-      'bbc-recipe__summary'
-    );
-    ingredients = TestUtils.findRenderedComponentWithType(
-      renderedComponent,
-      RecipeIngredients
-    );
-    method = TestUtils.findRenderedComponentWithType(
-      renderedComponent,
-      RecipeMethod
+  function renderComponent(error = '') {
+    renderedComponent = TestUtils.renderIntoDocument(
+      <RecipeView recipe={recipe} error={error} />
     );
     backLink = TestUtils.findRenderedComponentWithType(
       renderedComponent,
       Link
     );
-  });
+    errorElems = TestUtils.scryRenderedDOMComponentsWithClass(
+      renderedComponent,
+      'bbc-recipe__error'
+    );
+  }
 
   it('should render correctly', () => {
+    renderComponent();
+
+    const heading = TestUtils.findRenderedDOMComponentWithClass(
+      renderedComponent,
+      'bbc-recipe__heading'
+    );
+    const recipeImage = TestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      RecipeImage
+    );
+    const summary = TestUtils.findRenderedDOMComponentWithClass(
+      renderedComponent,
+      'bbc-recipe__summary'
+    );
+    const ingredients = TestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      RecipeIngredients
+    );
+    const method = TestUtils.findRenderedComponentWithType(
+      renderedComponent,
+      RecipeMethod
+    );
+
     expect(heading.innerHTML).to.equal(recipe.name);
     expect(recipeImage.props.className).to.equal('bbc-recipe__image');
     expect(recipeImage.props.src).to.equal(recipe.image);
@@ -73,5 +77,12 @@ describe('Component: Recipe View', () => {
     expect(method.props.method).to.equal(recipe.method);
     expect(backLink.props.to).to.equal('/');
     expect(backLink.props.children).to.equal('Back');
+    expect(errorElems.length).to.equal(0);
+  });
+
+  it('should render an error message when there is an error', () => {
+    renderComponent('error');
+    expect(backLink.props.to).to.equal('/');
+    expect(errorElems.length).to.equal(1);
   });
 });

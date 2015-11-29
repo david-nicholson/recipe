@@ -11,7 +11,7 @@ export class RecipeViewApp extends Component {
 
   render() {
     return (
-      <RecipeView recipe={this.props.recipe.item} />
+      <RecipeView recipe={this.props.recipe.item} error={this.props.recipe.error} />
     );
   }
 }

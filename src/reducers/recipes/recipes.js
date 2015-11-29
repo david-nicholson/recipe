@@ -1,6 +1,7 @@
 import {
   REQUEST_RECIPES,
   RECEIVE_RECIPES,
+  REQUEST_RECIPES_FAILURE,
   FILTER_RECIPES,
   SHOW_MORE_RECIPES,
   SORT_RECIPES,
@@ -10,6 +11,7 @@ const defaultNoOfItemsInView = 10;
 
 const initialState = {
   ascending: false,
+  error: '',
   filterTerm: '',
   filteredResults: [],
   isFetching: false,
@@ -23,6 +25,7 @@ export default function recipes(state = initialState, action) {
     /* eslint-disable indent */
     case REQUEST_RECIPES:
       return Object.assign({}, state, {
+        error: '',
         isFetching: true,
       });
     case RECEIVE_RECIPES:
@@ -30,6 +33,11 @@ export default function recipes(state = initialState, action) {
         isFetching: false,
         items: action.recipes,
         itemsInView: [...action.recipes].splice(0, state.noOfItemsInView),
+      });
+    case REQUEST_RECIPES_FAILURE:
+      return Object.assign({}, state, {
+        error: 'Sorry, we currently have no recipes for you',
+        isFetching: false,
       });
     case FILTER_RECIPES:
       // assuming a case insensitive search, searching all recipes and that there is pagination on the filter that resets with each type ?? NEED TO RESET

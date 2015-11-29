@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import {
   REQUEST_RECIPES,
   RECEIVE_RECIPES,
+  REQUEST_RECIPES_FAILURE,
   FILTER_RECIPES,
   SHOW_MORE_RECIPES,
   SORT_RECIPES,
@@ -31,6 +32,14 @@ describe('Reducer: Recipes', () => {
       expect(requestRecipes.isFetching).to.equal(false);
       expect(requestRecipes.items).to.equal(items);
       expect(requestRecipes.itemsInView).to.eql(items.splice(0, 3));
+    });
+  });
+
+  describe(REQUEST_RECIPES_FAILURE, () => {
+    it('should update the state', () => {
+      const requestRecipes = recipes({ isFetching: true }, { type: REQUEST_RECIPES_FAILURE });
+      expect(requestRecipes.isFetching).to.equal(false);
+      expect(requestRecipes.error).to.equal('Sorry, we currently have no recipes for you');
     });
   });
 

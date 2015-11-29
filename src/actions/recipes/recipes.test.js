@@ -34,13 +34,13 @@ describe('Actions: Recipes', () => {
       const recipes = [{a: 'recipe'}, {another: 'thing'}];
       const expectedActions = [
         { type: REQUEST_RECIPES },
-        { type: RECEIVE_RECIPES, recipes: recipes},
+        { type: RECEIVE_RECIPES, recipes: { items: recipes }},
       ];
       const store = mockStore({ recipes: [] }, expectedActions, done);
 
-      nock('http://something.com/')
-        .get('/recipes')
-        .reply(200, { recipes: recipes});
+      nock('http://0.0.0.0:3000/')
+        .get('/data/recipes')
+        .reply(200, { items: recipes});
 
       store.dispatch(fetchRecipes());
     });

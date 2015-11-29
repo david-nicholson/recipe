@@ -31,7 +31,7 @@ export class RecipeApp extends Component {
     return (
       <div className="bbc-recipe-list-view">
         <RecipeHeader onFilterRecipes={searchTerm => dispatch(filterRecipes(searchTerm))} onSortRecipes={() => dispatch(sortRecipes())} />
-        <RecipeList recipes={recipes.itemsInView} />
+        <RecipeList recipes={recipes.itemsInView} error={recipes.error} />
         {this.getShowMore(dispatch)}
       </div>
     );

@@ -26,10 +26,11 @@ export default function mockStore(getState, expectedActions, done) {
 
       dispatch(action) {
         const expectedAction = expectedActions.shift();
-
         try {
           expect(action).to.eql(expectedAction);
-          done();
+          if (done && expectedActions.length === 0) {
+            done();
+          }
         } catch (e) {
           done(e);
         }

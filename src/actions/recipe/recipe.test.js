@@ -27,17 +27,17 @@ describe('Actions: Recipe', () => {
     });
 
     it('should fetch recipes', (done) => {
-      const recipeName = 'A recipe';
+      const recipeName = 'a-recipe';
       const recipe = ['a recipe'];
       const expectedActions = [
         { type: REQUEST_RECIPE, recipeName },
-        { type: RECEIVE_RECIPE, recipeName, recipe: recipe },
+        { type: RECEIVE_RECIPE, recipeName, recipe: { item: recipe } },
       ];
       const store = mockStore({ recipe: {} }, expectedActions, done);
 
-      nock('http://something.com/')
-        .get('/recipes/a-recipe')
-        .reply(200, { recipe: recipe });
+      nock('http://0.0.0.0:3000/')
+        .get('/data/recipes/a-recipe')
+        .reply(200, { item: recipe });
 
       store.dispatch(fetchRecipe(recipeName));
     });
