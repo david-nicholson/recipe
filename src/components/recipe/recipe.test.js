@@ -19,7 +19,7 @@ describe('Component: Recipe', () => {
     );
     name.elem = TestUtils.findRenderedDOMComponentWithClass(
       renderedComponent,
-      'bbc-recipe__name'
+      'bbc-recipe-item__name'
     );
     image.elem = TestUtils.findRenderedComponentWithType(
       renderedComponent,
@@ -27,7 +27,7 @@ describe('Component: Recipe', () => {
     );
     time.elem = TestUtils.findRenderedDOMComponentWithClass(
       renderedComponent,
-      'bbc-recipe__time'
+      'bbc-recipe-item__time'
     );
   });
 

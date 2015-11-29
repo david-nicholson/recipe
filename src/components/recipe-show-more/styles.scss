@@ -1,0 +1,23 @@
+@import 'src/scss/constants';
+@import 'src/scss/mixins/transitions';
+
+.bbc-show-more {
+  position: relative;
+  margin: $default-padding;
+  padding: $default-padding;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: .8em;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: $light-grey;
+  @include default-transition;
+
+  &:hover {
+    color: $white;
+    background: $dark-grey;
+  }
+}

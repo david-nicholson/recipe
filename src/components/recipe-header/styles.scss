@@ -1,0 +1,33 @@
+@import 'src/scss/constants';
+@import 'src/scss/mixins/responsive';
+
+.bbc-recipe-header {
+  width: 100%;
+  background: $light-grey;
+  padding: $default-padding;
+
+  &__title {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 1.5em;
+    color: $dark-grey;
+    vertical-align: middle;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__order {
+    float: right;
+    font-size: .8em;
+    line-height: 3em;
+    color: $dark-grey;
+    font-weight: bold;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

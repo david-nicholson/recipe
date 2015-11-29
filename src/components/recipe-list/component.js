@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Recipe from '../recipe/component';
 
+import './styles.scss';
+
 class RecipeList extends Component {
   render() {
     return (

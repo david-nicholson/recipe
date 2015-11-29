@@ -5,6 +5,7 @@ const initialState = {
   item: {
     name: '',
     image: '',
+    summary: '',
     cookingTime: '',
     ingredients: [],
     method: [],

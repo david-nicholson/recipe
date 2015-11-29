@@ -4,6 +4,8 @@ import RecipeIngredients from '../recipe-ingredients/component';
 import RecipeMethod from '../recipe-method/component';
 import RecipeImage from '../recipe-image/component';
 
+import './styles.scss';
+
 class RecipeView extends Component {
   render() {
     return (
@@ -22,13 +24,14 @@ class RecipeView extends Component {
 }
 
 RecipeView.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.shape({
+  recipe: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    cookingTime: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.string.isOptional).isRequired,
-    method: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  })),
+    summary: PropTypes.string.isRequired,
+    cookingTime: PropTypes.string,
+    ingredients: PropTypes.array.isRequired,
+    method: PropTypes.array.isRequired,
+  }),
 };
 
 export default RecipeView;

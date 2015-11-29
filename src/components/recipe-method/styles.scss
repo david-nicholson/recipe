@@ -1,0 +1,28 @@
+@import 'src/scss/constants';
+@import 'src/scss/mixins/typography';
+
+.bbc-method {
+
+  &__heading {
+    color: $dark-grey;
+    @include sub-heading;
+  }
+
+  &__list {
+    counter-reset: item-counter;
+  }
+
+  &__step {
+    margin-bottom: $default-padding;
+    list-style: none;
+    counter-increment: item-counter;
+    display: inline-block;
+
+    &:before {
+      content: counter(item-counter)'.';
+      margin-right: $default-padding;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  }
+}

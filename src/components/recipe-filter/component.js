@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import './styles.scss';
+
 class RecipeFilter extends Component {
   render() {
     return (

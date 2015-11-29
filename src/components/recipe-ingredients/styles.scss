@@ -1,0 +1,31 @@
+@import 'src/scss/constants';
+@import 'src/scss/mixins/typography';
+
+.bbc-ingredients {
+  border-bottom: 1px solid $light-grey;
+
+  &,
+  &__item {
+    list-style: none;
+  }
+
+  &__heading {
+    color: $dark-grey;
+    @include sub-heading;
+  }
+
+  &__item {
+    margin-bottom: $default-padding;
+
+    &--group-heading {
+      margin-top: .5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: $dark-grey;
+    }
+
+    &--sub {
+      text-indent: 1.3em;
+    }
+  }
+}

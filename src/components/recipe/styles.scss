@@ -1,0 +1,50 @@
+@import 'src/scss/constants';
+
+$image-width: 88px;
+$image-column-width: $image-width + $default-padding;
+
+.bbc-recipe-item {
+  width: 100%;
+  min-height: 55px;
+  list-style: none;
+  padding-top: $default-padding;
+
+  &__link {
+    display: block;
+
+    &:hover {
+      .bbc-recipe-item__name {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__image,
+  &__name,
+  &__time {
+    display: inline-block;
+    vertical-align: top;
+    color: $black;
+  }
+
+  &__image {
+    width: $image-width;
+    padding-left: $default-padding;
+  }
+
+  &__name,
+  &__time {
+    color: $dark-grey;
+    font-weight: bold;
+  }
+
+  &__name {
+    width: calc(70% - #{$image-column-width/2});
+    padding: 0 $default-padding;
+  }
+
+  &__time {
+    width: calc(30% - #{$image-column-width/2});
+    text-align: right;
+  }
+}

@@ -5,6 +5,12 @@ import {
   RECEIVE_RECIPES,
   receiveRecipes,
   fetchRecipes,
+  FILTER_RECIPES,
+  filterRecipes,
+  SHOW_MORE_RECIPES,
+  showMoreRecipes,
+  SORT_RECIPES,
+  sortRecipes,
 } from './recipes';
 import nock from 'nock';
 import mockStore from '../../../test/mock-store';
@@ -38,5 +44,18 @@ describe('Actions: Recipes', () => {
 
       store.dispatch(fetchRecipes());
     });
+  });
+
+  it('should return correct object when filterRecipes', () => {
+    const searchTerm = 'something';
+    expect(filterRecipes(searchTerm)).to.eql({type: FILTER_RECIPES, searchTerm});
+  });
+
+  it('should return correct object when showing more recipes', () => {
+    expect(showMoreRecipes()).to.eql({type: SHOW_MORE_RECIPES});
+  });
+
+  it('should return correct object when sorting recipes', () => {
+    expect(sortRecipes()).to.eql({type: SORT_RECIPES});
   });
 });

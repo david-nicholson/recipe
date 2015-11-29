@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import RecipeFilter from '../recipe-filter/component';
 
+import './styles.scss';
+
 class RecipeHeader extends Component {
   render() {
     return (

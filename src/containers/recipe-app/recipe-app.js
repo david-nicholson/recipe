@@ -5,6 +5,8 @@ import RecipeHeader from '../../components/recipe-header/component';
 import RecipeList from '../../components/recipe-list/component';
 import RecipeShowMore from '../../components/recipe-show-more/component';
 
+import './styles.scss';
+
 export class RecipeApp extends Component {
 
   componentDidMount() {
@@ -27,7 +29,7 @@ export class RecipeApp extends Component {
     const { dispatch, recipes } = this.props;
 
     return (
-      <div>
+      <div className="bbc-recipe-list-view">
         <RecipeHeader onFilterRecipes={searchTerm => dispatch(filterRecipes(searchTerm))} onSortRecipes={() => dispatch(sortRecipes())} />
         <RecipeList recipes={recipes.itemsInView} />
         {this.getShowMore(dispatch)}

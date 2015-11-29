@@ -1,0 +1,50 @@
+@import 'src/scss/constants';
+@import 'src/scss/mixins/transitions';
+
+.bbc-recipe {
+  margin: $default-padding;
+
+  &__heading,
+  &__summary {
+    margin: $default-padding 0;
+    padding-bottom: $default-padding;
+    border-bottom: 1px solid $light-grey;
+  }
+
+  &__heading {
+    color: $dark-grey;
+  }
+
+  &__image {
+    max-width: 100%;
+  }
+
+  &__back-btn {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    color: $dark-grey;
+    padding: $default-padding 0 $default-padding $default-padding;
+    font-weight: bold;
+    background: $light-grey;
+    @include default-transition;
+
+    &:before {
+      content: '<';
+      margin-right: $default-padding;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: $mid-grey;
+      @include default-transition;
+    }
+
+    &:hover {
+      color: $white;
+      background: $dark-grey;
+
+      &:before {
+        color: $mid-grey;
+      }
+    }
+  }
+}
