@@ -5,7 +5,7 @@ import {
   FILTER_RECIPES,
   SHOW_MORE_RECIPES,
   SORT_RECIPES,
-} from '../../actions/recipes/recipes';
+} from '../../actions/recipes/action';
 import recipes from './recipes';
 import filterFixture from '../../../test/fixtures/filter';
 

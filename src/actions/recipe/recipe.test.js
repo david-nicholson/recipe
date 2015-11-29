@@ -5,7 +5,7 @@ import {
   RECEIVE_RECIPE,
   receiveRecipe,
   fetchRecipe,
-} from './recipe';
+} from './action';
 import nock from 'nock';
 import mockStore from '../../../test/mock-store';
 

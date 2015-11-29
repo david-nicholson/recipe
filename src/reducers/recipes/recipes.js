@@ -4,7 +4,7 @@ import {
   FILTER_RECIPES,
   SHOW_MORE_RECIPES,
   SORT_RECIPES,
-} from '../../actions/recipes/recipes';
+} from '../../actions/recipes/action';
 
 const defaultNoOfItemsInView = 10;
 

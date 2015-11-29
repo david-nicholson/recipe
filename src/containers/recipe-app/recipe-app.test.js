@@ -7,7 +7,7 @@ import RecipeHeader from '../../components/recipe-header/component';
 import RecipeList from '../../components/recipe-list/component';
 import RecipeShowMore from '../../components/recipe-show-more/component';
 
-describe('Container: Recipe View App', () => {
+describe('Container: Recipe App', () => {
   let dispatchSpy;
   let fetchRecipesSpy;
   let filterRecipesSpy;
@@ -31,8 +31,8 @@ describe('Container: Recipe View App', () => {
   };
 
   function renderComponent(state) {
-    const RecipeAppMock = proxyquire.noCallThru().load('./recipe-app', {
-      '../../actions/recipes/recipes': {
+    const RecipeAppMock = proxyquire.noCallThru().load('./container', {
+      '../../actions/recipes/action': {
         fetchRecipes: fetchRecipesSpy,
         filterRecipes: filterRecipesSpy,
         sortRecipes: sortRecipesSpy,

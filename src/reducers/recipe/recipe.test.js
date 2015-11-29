@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import {
   REQUEST_RECIPE,
   RECEIVE_RECIPE,
-} from '../../actions/recipe/recipe';
+} from '../../actions/recipe/action';
 import recipe from './recipe';
 
 describe('Reducer: Recipe', () => {

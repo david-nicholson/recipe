@@ -34,8 +34,8 @@ describe('Container: Recipe View App', () => {
   beforeEach(() => {
     dispatchSpy = sinon.spy();
     fetchRecipeSpy = sinon.spy();
-    const RecipeViewAppMock = proxyquire.noCallThru().load('./recipe-view-app', {
-      '../../actions/recipe/recipe': { fetchRecipe: fetchRecipeSpy },
+    const RecipeViewAppMock = proxyquire.noCallThru().load('./container', {
+      '../../actions/recipe/action': { fetchRecipe: fetchRecipeSpy },
     });
     const renderedComponent = TestUtils.renderIntoDocument(
       <RecipeViewAppMock.RecipeViewApp recipe={recipe} dispatch={dispatchSpy} routeParams={routeParams} />

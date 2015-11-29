@@ -1,4 +1,4 @@
-import { REQUEST_RECIPE, RECEIVE_RECIPE } from '../../actions/recipe/recipe';
+import { REQUEST_RECIPE, RECEIVE_RECIPE } from '../../actions/recipe/action';
 
 const initialState = {
   isFetching: false,

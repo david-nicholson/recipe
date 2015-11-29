@@ -11,7 +11,7 @@ import {
   showMoreRecipes,
   SORT_RECIPES,
   sortRecipes,
-} from './recipes';
+} from './action';
 import nock from 'nock';
 import mockStore from '../../../test/mock-store';
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipe } from '../../actions/recipe/recipe';
+import { fetchRecipe } from '../../actions/recipe/action';
 import RecipeView from '../../components/recipe-view/component';
 
 export class RecipeViewApp extends Component {

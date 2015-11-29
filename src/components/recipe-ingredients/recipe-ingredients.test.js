@@ -3,7 +3,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import RecipeIngredients from './component';
 
-describe('Component: Recipe Image', () => {
+describe('Component: Recipe ingredients', () => {
   let renderedComponent;
   let headingElem;
   let ingredientElems;
