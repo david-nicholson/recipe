@@ -2,6 +2,8 @@ import fetch from 'isomorphic-fetch';
 
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES';
+export const FILTER_RECIPES = 'FILTER_RECIPES';
+export const SORT_RECIPES = 'SORT_RECIPES';
 
 export function requestRecipes() {
   return {
@@ -22,5 +24,18 @@ export function fetchRecipes() {
     return fetch('http://0.0.0.0:3000/data/recipes')
       .then(response => response.json())
       .then(json => dispatch(receiveRecipes(json)));
+  }
+}
+
+export function filterRecipes(searchTerm) {
+  return {
+    type: FILTER_RECIPES,
+    searchTerm,
+  };
+};
+
+export function sortRecipes() {
+  return {
+    type: SORT_RECIPES,
   }
 }
