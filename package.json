@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-express-mocha-boilerplate",
+  "name": "recipe",
   "version": "1.0.0",
-  "description": "A React, Webpack, Express, Mocha Boilerplate with inspiration from various blogs/sources",
+  "description": "A React and Redux app for displaying recipes",
   "main": "server/index.js",
   "scripts": {
     "build": "node_modules/.bin/rimraf dist && NODE_ENV=production node_modules/.bin/webpack --config ./webpack.prod.config.js --progress --profile --colors",
