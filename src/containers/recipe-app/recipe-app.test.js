@@ -16,6 +16,7 @@ describe('Container: Recipe App', () => {
   let renderedComponent;
   let recipeHeaderElem;
   let recipeListElem;
+  let noResultsElem;
   const recipes = {
     itemsInView: [
       'a-recipe',
@@ -50,6 +51,10 @@ describe('Container: Recipe App', () => {
       renderedComponent,
       RecipeList
     );
+    noResultsElem = TestUtils.scryRenderedDOMComponentsWithClass(
+      renderedComponent,
+      'bbc-recipe-list-view__no-results'
+    );
   }
 
   beforeEach(() => {
@@ -64,6 +69,7 @@ describe('Container: Recipe App', () => {
     renderComponent(recipes);
     expect(recipeHeaderElem).to.exist; // eslint-disable-line no-unused-expressions
     expect(recipeListElem.props.recipes).to.eql(recipes.itemsInView);
+    expect(noResultsElem.length).to.eql(0);
   });
 
   describe('should call a dispatch', () => {
@@ -108,6 +114,7 @@ describe('Container: Recipe App', () => {
         renderComponent(state);
 
         expect(getShowMoreElems().length).to.equal(1);
+        expect(noResultsElem.length).to.eql(0);
       });
 
       it('should not display if there are less results than the default amount displayed', () => {
@@ -119,6 +126,7 @@ describe('Container: Recipe App', () => {
         renderComponent(state);
 
         expect(getShowMoreElems().length).to.equal(0);
+        expect(noResultsElem.length).to.eql(0);
       });
     });
 
@@ -135,6 +143,7 @@ describe('Container: Recipe App', () => {
         renderComponent(state);
 
         expect(getShowMoreElems().length).to.equal(1);
+        expect(noResultsElem.length).to.eql(0);
       });
 
       it('should not display if there are less results than the default amount displayed', () => {
@@ -147,6 +156,7 @@ describe('Container: Recipe App', () => {
         renderComponent(state);
 
         expect(getShowMoreElems().length).to.equal(0);
+        expect(noResultsElem.length).to.eql(0);
       });
     });
 
@@ -162,6 +172,17 @@ describe('Container: Recipe App', () => {
       expect(dispatchSpy.calledOnce);
       expect(showMoreSpy.calledOnce);
     });
+  });
+
+  it('should show a no results message if there is a search term and no results', () => {
+    const state = Object.assign({
+      filterTerm: 'something that doesnt have any results',
+      noOfItemsInView: 2,
+    }, recipes);
+    state.itemsInView = [];
+
+    renderComponent(state);
+    expect(noResultsElem.length).to.eql(1);
   });
 
   afterEach(() => {

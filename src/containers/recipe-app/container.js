@@ -27,11 +27,17 @@ export class RecipeApp extends Component {
 
   render() {
     const { dispatch, recipes } = this.props;
+    let noResults;
+
+    if (recipes.filterTerm && recipes.itemsInView.length === 0) {
+      noResults = <h3 className="bbc-recipe-list-view__no-results">Sorry, nothing matched your filter term</h3>;
+    }
 
     return (
       <div className="bbc-recipe-list-view">
         <RecipeHeader onFilterRecipes={searchTerm => dispatch(filterRecipes(searchTerm))} onSortRecipes={() => dispatch(sortRecipes())} />
         <RecipeList recipes={recipes.itemsInView} error={recipes.error} />
+        {noResults}
         {this.getShowMore(dispatch)}
       </div>
     );
