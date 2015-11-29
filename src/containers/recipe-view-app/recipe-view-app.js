@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import action from '../../actions/recipe/recipe';
+import { fetchRecipe } from '../../actions/recipe/recipe';
 import RecipeView from '../../components/recipe-view/component';
 
 export class RecipeViewApp extends Component {
 
   componentDidMount() {
-    this.props.dispatch(action.fetchRecipe(this.props.routeParams.name));
+    this.props.dispatch(fetchRecipe(this.props.routeParams.name));
   }
 
   render() {
