@@ -70,6 +70,88 @@ describe('Container: Recipe View App', () => {
     });
   });
 
+  describe('show more button', () => {
+
+    describe('when there is no search term', () => {
+      it('should display if there are more results than the default amount displayed', () => {
+        const state = {
+          ...recipes,
+          filterTerm: '',
+          noOfItemsInView: 2,
+        }
+
+        renderComponent(state);
+
+        expect(getShowMoreElems().length).to.equal(1);
+      });
+
+      it('should not display if there are less results than the default amount displayed', () => {
+        const state = {
+          ...recipes,
+          filterTerm: '',
+          noOfItemsInView: 4,
+        }
+
+        renderComponent(state);
+
+        expect(getShowMoreElems().length).to.equal(0);
+      });
+    });
+
+    describe('when there is a search term', () => {
+
+      const filteredResults = [1,2,3];
+
+      it('should display if there are more results than the default amount displayed', () => {
+        const state = {
+          ...recipes,
+          filteredResults: filteredResults,
+          filterTerm: 'something',
+          noOfItemsInView: 2,
+        }
+
+        renderComponent(state);
+
+        expect(getShowMoreElems().length).to.equal(1);
+      });
+
+      it('should not display if there are less results than the default amount displayed', () => {
+        const state = {
+          ...recipes,
+          filteredResults: filteredResults,
+          filterTerm: 'something',
+          noOfItemsInView: 4,
+        }
+
+        renderComponent(state);
+
+        expect(getShowMoreElems().length).to.equal(0);
+      });
+    });
+
+    it('should call to showMoreRecipes when onShowMore prop is executed', () => {
+      const state = {
+        ...recipes,
+        filterTerm: '',
+        noOfItemsInView: 2,
+      }
+
+      renderComponent(state);
+
+      getShowMoreElems()[0].props.onShowMore();
+      expect(dispatchSpy.calledOnce);
+      expect(showMoreSpy.calledOnce);
+    });
+
+    function getShowMoreElems() {
+      return TestUtils.scryRenderedComponentsWithType(
+        renderedComponent,
+        RecipeShowMore
+      );
+    }
+
+  });
+
   afterEach(() => {
     dispatchSpy.reset();
     fetchRecipesSpy.reset();

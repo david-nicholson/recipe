@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES';
 export const FILTER_RECIPES = 'FILTER_RECIPES';
+export const SHOW_MORE_RECIPES = 'SHOW_MORE_RECIPES';
 export const SORT_RECIPES = 'SORT_RECIPES';
 
 export function requestRecipes() {
@@ -33,6 +34,12 @@ export function filterRecipes(searchTerm) {
     searchTerm,
   };
 };
+
+export function showMoreRecipes() {
+  return {
+    type: SHOW_MORE_RECIPES,
+  }
+}
 
 export function sortRecipes() {
   return {

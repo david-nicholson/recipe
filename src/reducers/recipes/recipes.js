@@ -2,8 +2,11 @@ import {
   REQUEST_RECIPES,
   RECEIVE_RECIPES,
   FILTER_RECIPES,
+  SHOW_MORE_RECIPES,
   SORT_RECIPES,
 } from '../../actions/recipes/recipes';
+
+const defaultNoOfItemsInView = 10;
 
 const initialState = {
   ascending: false,
@@ -12,6 +15,7 @@ const initialState = {
   isFetching: false,
   items: [],
   itemsInView: [],
+  noOfItemsInView: defaultNoOfItemsInView,
 };
 
 export default function recipes(state = initialState, action) {
@@ -48,6 +52,14 @@ export default function recipes(state = initialState, action) {
         filteredResults: filteredResults,
         itemsInView: itemsInView.splice(0, defaultNoOfItemsInView),
         noOfItemsInView: defaultNoOfItemsInView,
+      });
+    case SHOW_MORE_RECIPES:
+      const newNoOfItemsInView = state.noOfItemsInView + 10;
+      const items = state.filterTerm ? state.filteredResults : state.items;
+
+      return Object.assign({}, state, {
+        noOfItemsInView: newNoOfItemsInView,
+        itemsInView: [...items].splice(0, newNoOfItemsInView),
       });
     case SORT_RECIPES:
       const ascending = (a, b) => parseInt(a.cookingTime) - parseInt(b.cookingTime);
