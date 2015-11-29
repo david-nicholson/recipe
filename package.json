@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "build": "node_modules/.bin/rimraf dist && NODE_ENV=production node_modules/.bin/webpack --config ./webpack.prod.config.js --progress --profile --colors",
-    "dev": "node_modules/.bin/babel-node server",
+    "start": "node_modules/.bin/babel-node server",
     "eslint": "./node_modules/.bin/eslint --ext .js .jsx src",
     "jscs": "./node_modules/.bin/jscs --preset=airbnb src",
     "test": "node_modules/.bin/mocha --colors --sort --reporter spec --compilers js:babel/register --require './test/setup.js' './src/**/*.test.js'"
