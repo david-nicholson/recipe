@@ -19,4 +19,4 @@ I used React to build components that handle the displaying of the data and then
 
 The feature files also acted as the test scenarios and allowed basic test scenarios to be laid down based on behaviour, followed by more advanced/edge cases.
 
-Once the application's behaviour were in place I then very basically styled the app.
+Once the application's behaviour was in place I then very basically styled the app.
